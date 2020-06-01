@@ -1,0 +1,50 @@
+type UserInfo {
+    userUUID: String!,
+    email: String!,
+    nickName: String,
+    projects: [ProjectInfo],
+    workingRecords(startDate: Date, endDate: Date): [WorkingRecord]
+}
+type ProjectInfo {
+    projectUUID: String!,
+    name: String,
+    description: String,
+    items: [Item],
+}
+
+type Member {
+    id: String!,
+    email: String!,
+    nickName: String
+}
+
+type Task {
+    title: String,
+    description: String,
+    members: [Member!]!,
+    startWeek: Int,
+    closeWeek: Int,
+    subTask: [SubTask]
+}
+type SubTask {
+    title: String,
+    members: [Member],
+    startWeek: Int,
+    closeWeek: Int
+}
+
+type WorkingRecord {
+    recordUUID: String,
+    date: Date,
+    recordItems: [RecordItem]
+}
+
+type RecordItem {
+    title: String,
+    description: String,
+    projectUUID: String,
+    "單位為分鐘儲存，前端再進行換算"
+    startTime: Date,
+    endTime: Date,
+    createTime: Date
+}

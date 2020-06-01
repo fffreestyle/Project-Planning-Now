@@ -44,4 +44,16 @@
 * 新增修改刪除今日工作項目
 * 設定番茄鐘提醒功能
 
+## **使用技術**
+### **前端**
+* React
+* Redux
+* GraphQL
+* Typescript
+* Tailwind
+* Jest
+* react-testing-library
 
+### **後端**
+* Python
+* PostgreSQL
