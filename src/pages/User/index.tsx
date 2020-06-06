@@ -4,11 +4,11 @@ type User = {
   name: string
 }
 
-interface Props {
+interface IUserInfo {
   user: User
 }
 
-const UserPage = (props: Props) => {
+const UserPage = (props: IUserInfo) => {
   const { user } = props
 
   return <div>{user.name}</div>
