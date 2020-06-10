@@ -1,54 +1,31 @@
 import React from 'react'
-import { DailyRecordModel } from './dailyRecordModel'
-import DailyRecords from './dailyRecords'
+import { connect, ConnectedProps } from 'react-redux'
 import moment from 'moment'
 import { range } from 'ramda'
+import WeeklyRecord from './weeklyRecord'
+import { IDailyRecord, IDailyRecordState } from '../../redux/store/dailyRecord/types'
+import { RootState } from '../../redux/store/index'
+import { v4 as uuidv4 } from 'uuid';
+import { SetDailyRecords } from '../../redux/store/dailyRecord/actions'
 
-const mockRecords: DailyRecordModel[] = [{
-    recordUUID: 'aaa',
-    date: new Date(),
-    recordItems: [{
-        title: 'String',
-        description: 'String',
-        startTime: new Date(),
-        endTime: new Date(),
-        createTime: new Date(),
-    }]
-},
-{
-    recordUUID: 'vvv',
-    date: moment().add(1,'day').toDate(),
-    recordItems: [{
-        title: 'String',
-        description: 'String',
-        startTime: new Date(),
-        endTime: new Date(),
-        createTime: new Date(),
-    }]
-}];
+const mapState = (state: RootState): IDailyRecordState => (state.dailyRecord);
+const mapDispatch = {
+    setDailyRecords: SetDailyRecords
+}
+const connector = connect(mapState, mapDispatch);
 
-const DailyRecordPage = () => {
-    const weekDay = range(0, 7).map((day) => moment().day(day));
-    const records = weekDay.map((day): DailyRecordModel => {
-        const currentDateRecord = mockRecords.find((mockRecord) => moment(mockRecord.date).isSame(day, 'day'));
-        if(currentDateRecord === undefined){
-            return {
-                recordUUID: '',
-                date: day.toDate(),
-                recordItems: []
-            }
-        }
-        return {
-            recordUUID: currentDateRecord.recordUUID,
-            date: day.toDate(),
-            recordItems: currentDateRecord.recordItems
-        }
-    })
+
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux;
+
+const DailyRecordPage = (props: Props) => {
     return (
         <div>
-            <DailyRecords workingRecords={records}></DailyRecords>
+            <WeeklyRecord></WeeklyRecord>
         </div>
     );
 }
 
-export default DailyRecordPage;
+export default connector(DailyRecordPage);

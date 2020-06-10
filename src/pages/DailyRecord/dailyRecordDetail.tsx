@@ -1,21 +1,26 @@
 import React from "react";
-import { DailyRecordDetailModel } from './dailyRecordModel';
+import { IDailyRecordDetail } from "../../redux/store/dailyRecord/types";
+import EditDailyRecordDetail from './editDailyRecordDetail'
+import DeleteDailyRecordDetail from './deleteDailyRecordDetail'
+import { Row, Col } from "antd";
 
 interface IRecordItem {
-    recordItem: DailyRecordDetailModel,
-    index: number,
-    removeRecordDetail: (beDeletedIndex: number) => void,
-    editRecordDetail: (beEditIndex: number) => void,
+    recordItem: IDailyRecordDetail,
 }
 
 const DailyRecordDetail = (props: IRecordItem) => {
     const { recordItem } = props;
-    const { index } = props;
-    const { removeRecordDetail } = props;
-    const { editRecordDetail } = props;
+
     return (
         <div>
-            <button>Edit</button><button onClick={() => removeRecordDetail(index)}>Delete</button>
+            <Row gutter={8}>
+                <Col span={12}>
+                    <EditDailyRecordDetail record={recordItem}></EditDailyRecordDetail>
+                </Col>
+                <Col span={12}>
+                    <DeleteDailyRecordDetail record={recordItem}></DeleteDailyRecordDetail>
+                </Col>
+            </Row>
             <div>{recordItem.title}</div>
             <div>{recordItem.description}</div>
         </div>
