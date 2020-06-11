@@ -19,7 +19,10 @@ const DeleteDailyRecordDetail = (props: Props) => {
     const { DeleteRecordDetail } = props;
 
     const deleteRecord = () => {
-        DeleteRecordDetail(props.record.recordUUID, props.record.recordDetailUUID);
+        DeleteRecordDetail({
+            recordUUID: props.record.recordUUID,
+            recordDetailUUID: props.record.recordDetailUUID
+        });
     };
     return (
         <div>

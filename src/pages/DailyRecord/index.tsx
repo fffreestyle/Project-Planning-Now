@@ -6,13 +6,10 @@ import WeeklyRecord from './weeklyRecord'
 import { IDailyRecord, IDailyRecordState } from '../../redux/store/dailyRecord/types'
 import { RootState } from '../../redux/store/index'
 import { v4 as uuidv4 } from 'uuid';
-import { SetDailyRecords } from '../../redux/store/dailyRecord/actions'
 
 const mapState = (state: RootState): IDailyRecordState => (state.dailyRecord);
-const mapDispatch = {
-    setDailyRecords: SetDailyRecords
-}
-const connector = connect(mapState, mapDispatch);
+
+const connector = connect(mapState);
 
 
 
