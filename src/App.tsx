@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import UserPage from '../src/pages/User'
 import './App.css';
 import DailyRecordPage from './pages/DailyRecord';
+import PomodoroTimer from './pages/PomodoroTimer';
 
 
 function App() {
@@ -15,9 +16,12 @@ function App() {
       <Link to='/user'>User</Link>
       /
       <Link to='/WorkingRecord'>WorkingRecord</Link>
+      /
+      <Link to='/PomodoroTimer'>PomodoroTimer</Link>
       <Switch>
         <Route exact path='/user' render={() => <UserPage user={user}></UserPage>} />
         <Route exact path='/WorkingRecord' render={() => <DailyRecordPage></DailyRecordPage>} />
+        <Route exact path='/PomodoroTimer' render={() => <PomodoroTimer></PomodoroTimer>} />
       </Switch>
     </div>
   );
