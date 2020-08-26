@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import { deleteRecordDetail } from '../../redux/store/dailyRecord/actions'
 import { connect, ConnectedProps } from 'react-redux';
 import { IDailyRecordDetail } from '../../redux/store/dailyRecord/types';
@@ -20,16 +20,17 @@ const DeleteDailyRecordDetail = (props: Props) => {
     const { DeleteRecordDetail } = props;
 
     const deleteRecord = () => {
-        if (window.confirm('確認刪除嗎?')) {
-            DeleteRecordDetail({
-                recordUUID: props.record.recordUUID,
-                recordDetailUUID: props.record.recordDetailUUID
-            });
-        }
+        DeleteRecordDetail({
+            recordUUID: props.record.recordUUID,
+            recordDetailUUID: props.record.recordDetailUUID
+        });
     };
     return (
         <div>
-            <a onClick={deleteRecord}><DeleteOutlined /></a>
+            <Popconfirm placement='right' title='確認刪除嗎?' onConfirm={deleteRecord} okText="Yes" cancelText="No">
+                <a><DeleteOutlined /></a>
+            </Popconfirm>
+
         </div>
     )
 }
