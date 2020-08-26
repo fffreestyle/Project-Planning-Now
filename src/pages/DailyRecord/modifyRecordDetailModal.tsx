@@ -8,20 +8,21 @@ export type IinitialValues = {
     taikingTime: [Date, Date]
 }
 interface IRecordDetailModal {
+    modalTitle: string,
     recordUUID: string,
     visible: boolean,
     initialValues?: IinitialValues,
     onOk: (record: IDailyRecordDetail) => void,
     handleCancel: () => void
 }
-const ModifyRecordDetailModal = ({ recordUUID, visible, initialValues, onOk, handleCancel }: IRecordDetailModal) => {
+const ModifyRecordDetailModal = ({ modalTitle, recordUUID, visible, initialValues, onOk, handleCancel }: IRecordDetailModal) => {
     const { TextArea } = Input;
     const { RangePicker } = TimePicker;
     const [form] = Form.useForm();
     const format = 'HH:mm';
     return (
         <Modal
-            title="New Record"
+            title={modalTitle}
             visible={visible}
             onOk={() => {
                 form

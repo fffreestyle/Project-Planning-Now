@@ -32,6 +32,7 @@ const EditDailyRecordDetail = (props: Props) => {
         <div className='mr-1'>
             <a onClick={openModal}><EditOutlined /></a>
             <ModifyRecordDetailModal
+                modalTitle='Edit Record'
                 recordUUID={props.record.recordUUID}
                 initialValues={initialValues}
                 visible={visible}
