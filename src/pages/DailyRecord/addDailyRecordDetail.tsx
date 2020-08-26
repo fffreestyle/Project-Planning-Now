@@ -28,6 +28,7 @@ const AddDailyRecordDetail = (props: Props) => {
         <div className='flex'>
             <a className=' text-lg' onClick={openModal}><PlusOutlined /></a>
             <ModifyRecordDetailModal
+                modalTitle='New Record'
                 recordUUID={props.recordUUID}
                 visible={visible}
                 onOk={(values) => {
