@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import DailyRecordDetail from './dailyRecordDetail';
 import moment from 'moment';
-import { Col } from 'antd';
+import { sort } from 'ramda';
 import AddDailyRecordDetail from './addDailyRecordDetail'
 import { IDailyRecord, IDailyRecordDetail } from '../../redux/store/dailyRecord/types';
 
@@ -10,8 +10,8 @@ interface IWorkingRecord {
 }
 const DailyRecord = (props: IWorkingRecord) => {
     const record = props.workingRecord;
+    const timeDiff = (prev: IDailyRecordDetail, next: IDailyRecordDetail) => prev.startTime.valueOf() - next.startTime.valueOf();
     const { recordItems } = props.workingRecord;
-
     return (
         <div className='border flex-1 m-1'>
             <div className='flex text-center border-b'>
@@ -23,7 +23,7 @@ const DailyRecord = (props: IWorkingRecord) => {
                 </div>
             </div>
 
-            {recordItems.map((item) => <DailyRecordDetail key={item.recordDetailUUID} recordItem={item} ></DailyRecordDetail>)}
+            {sort(timeDiff, recordItems).map((item) => <DailyRecordDetail key={item.recordDetailUUID} recordItem={item} ></DailyRecordDetail>)}
         </div>
     );
 }
