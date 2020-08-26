@@ -1,9 +1,7 @@
 import React from 'react';
 import { Modal, Input, TimePicker, Form } from 'antd'
-import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
 import { IDailyRecordDetail } from '../../redux/store/dailyRecord/types';
-export type IinitialValues={
+export type IinitialValues = {
     recordDetailUUID: string,
     recordTitle: string,
     recordDescription: string,
@@ -35,7 +33,7 @@ const ModifyRecordDetailModal = ({ recordUUID, visible, initialValues, onOk, han
                         const [startTime, endTime] = values.taikingTime;
                         const record: IDailyRecordDetail = {
                             recordUUID: recordUUID,
-                            recordDetailUUID: initialValues!== undefined ?initialValues.recordDetailUUID:uuidv4(),
+                            recordDetailUUID: initialValues !== undefined ? initialValues.recordDetailUUID : '',
                             projectUUID: null,
                             title: title,
                             description: description,

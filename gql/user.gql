@@ -9,7 +9,7 @@ type ProjectInfo {
     projectUUID: String!,
     name: String,
     description: String,
-    items: [Item],
+    items: [Task],
 }
 
 type Member {

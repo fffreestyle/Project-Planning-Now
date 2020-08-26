@@ -13,11 +13,18 @@ const DailyRecord = (props: IWorkingRecord) => {
     const { recordItems } = props.workingRecord;
 
     return (
-        <Col span='3'>
-            <div>{moment(record.date).format('MM/DD(ddd)')}</div>
-            <AddDailyRecordDetail recordUUID={props.workingRecord.recordUUID} ></AddDailyRecordDetail>
+        <div className='border flex-1 m-1'>
+            <div className='flex text-center border-b'>
+                <div className=' flex-grow flex-shrink'>
+                    {moment(record.date).format('MM/DD(ddd)')}
+                </div>
+                <div className='flex-shrink-0 flex-grow-0'>
+                    <AddDailyRecordDetail recordUUID={props.workingRecord.recordUUID} ></AddDailyRecordDetail>
+                </div>
+            </div>
+
             {recordItems.map((item) => <DailyRecordDetail key={item.recordDetailUUID} recordItem={item} ></DailyRecordDetail>)}
-        </Col>
+        </div>
     );
 }
 

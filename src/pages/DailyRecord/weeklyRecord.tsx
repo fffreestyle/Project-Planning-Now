@@ -20,7 +20,7 @@ type Props = PropsFromRedux
 const WeeklyRecord = (props: Props) => {
     const records = props.weeklyRecords;
     return (
-        <Row>
+        <div className='flex container mx-auto'>
             {
                 records.map((record, index) => {
                     return (
@@ -28,7 +28,7 @@ const WeeklyRecord = (props: Props) => {
                     );
                 })
             }
-        </Row>
+        </div>
     );
 }
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from 'antd';
-import { DeleteRecordDetail } from '../../redux/store/dailyRecord/actions'
+import { deleteRecordDetail } from '../../redux/store/dailyRecord/actions'
 import { connect, ConnectedProps } from 'react-redux';
 import { IDailyRecordDetail } from '../../redux/store/dailyRecord/types';
+import { DeleteOutlined } from '@ant-design/icons';
 const mapDispatch = {
-    DeleteRecordDetail
+    DeleteRecordDetail: deleteRecordDetail
 }
 const connector = connect(null, mapDispatch);
 
@@ -19,14 +20,16 @@ const DeleteDailyRecordDetail = (props: Props) => {
     const { DeleteRecordDetail } = props;
 
     const deleteRecord = () => {
-        DeleteRecordDetail({
-            recordUUID: props.record.recordUUID,
-            recordDetailUUID: props.record.recordDetailUUID
-        });
+        if (window.confirm('確認刪除嗎?')) {
+            DeleteRecordDetail({
+                recordUUID: props.record.recordUUID,
+                recordDetailUUID: props.record.recordDetailUUID
+            });
+        }
     };
     return (
         <div>
-            <Button type='primary' onClick={deleteRecord}>Delete</Button>
+            <a onClick={deleteRecord}><DeleteOutlined /></a>
         </div>
     )
 }

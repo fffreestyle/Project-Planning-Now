@@ -9,10 +9,10 @@ import moment from "moment";
 //     IDailyRecord
 // } from "./types";
 import { IDailyRecord, IDailyRecordState } from "./types";
-import { range } from "ramda";
+import { range,clone } from "ramda";
 import { v4 as uuidv4 } from "uuid";
 import { createReducer } from "@reduxjs/toolkit";
-import { AddRecordDetail, EditRecordDetail, DeleteRecordDetail } from "./actions";
+import { addRecordDetail, editRecordDetail, deleteRecordDetail } from "./actions";
 
 const weekDay = range(0, 7).map((day) => moment().day(day));
 const records = weekDay.map((day): IDailyRecord => {
@@ -28,12 +28,14 @@ const initialState: IDailyRecordState = {
 
 export const dailyRecordReducer = createReducer(initialState, builder =>
     builder
-        .addCase(AddRecordDetail, (state, action) => {
-            let beAddRecord = state
+        .addCase(addRecordDetail, (state, action) => {
+            const beAddRecord = state
                 .dailyRecords
                 .find(dailyRecord => dailyRecord.recordUUID === action.payload.recordUUID);
             if (beAddRecord !== undefined) {
-                beAddRecord.recordItems.push(action.payload);
+                const addingRecordItem = clone(action.payload);
+                addingRecordItem.recordDetailUUID = uuidv4();
+                beAddRecord.recordItems.push(addingRecordItem);
             }
 
             // const newDailyRecords = state.dailyRecords.map((dailyRecord) => {
@@ -50,7 +52,7 @@ export const dailyRecordReducer = createReducer(initialState, builder =>
             //     dailyRecords: newDailyRecords
             // }
         })
-        .addCase(EditRecordDetail, (state, action) => {
+        .addCase(editRecordDetail, (state, action) => {
             let beEditRecord = state
                 .dailyRecords
                 .find(dailyRecord => dailyRecord.recordUUID === action.payload.recordUUID);
@@ -74,14 +76,17 @@ export const dailyRecordReducer = createReducer(initialState, builder =>
             //     dailyRecords: newDailyRecords
             // }
         })
-        .addCase(DeleteRecordDetail, (state, action) => {
-            let beEditRecord = state
+        .addCase(deleteRecordDetail, (state, action) => {
+            
+            const beEditRecord = state
                 .dailyRecords
                 .find(dailyRecord => dailyRecord.recordUUID === action.payload.recordUUID);
             if (beEditRecord !== undefined) {
                 const beDeleteRecordDetailIndex = beEditRecord.recordItems.findIndex(x => x.recordDetailUUID === action.payload.recordDetailUUID)
                 beEditRecord.recordItems.splice(beDeleteRecordDetailIndex, 1);
             }
+
+            
             // const newDailyRecords = state.dailyRecords.map((dailyRecord) => {
             //     if (dailyRecord.recordUUID === action.payload.recordUUID) {
             //         return {

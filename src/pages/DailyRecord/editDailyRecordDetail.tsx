@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import { EditRecordDetail as editDetail } from '../../redux/store/dailyRecord/actions'
+import { editRecordDetail as editDetail } from '../../redux/store/dailyRecord/actions'
 import { connect, ConnectedProps } from 'react-redux';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined } from '@ant-design/icons';
 import ModifyRecordDetailModal, { IinitialValues } from './modifyRecordDetailModal';
 import { IDailyRecordDetail } from '../../redux/store/dailyRecord/types';
 const mapDispatch = {
@@ -29,8 +29,8 @@ const EditDailyRecordDetail = (props: Props) => {
         taikingTime: [props.record.startTime, props.record.endTime]
     }
     return (
-        <div>
-            <Button type='primary' onClick={openModal}>Edit</Button>
+        <div className='mr-1'>
+            <a onClick={openModal}><EditOutlined /></a>
             <ModifyRecordDetailModal
                 recordUUID={props.record.recordUUID}
                 initialValues={initialValues}

@@ -3,7 +3,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import ModifyRecordDetailModal from './modifyRecordDetailModal';
 import { connect, ConnectedProps } from 'react-redux'
-import { AddRecordDetail as addDetail } from '../../redux/store/dailyRecord/actions'
+import { addRecordDetail as addDetail } from '../../redux/store/dailyRecord/actions'
 
 
 const mapDispatch = {
@@ -25,8 +25,8 @@ const AddDailyRecordDetail = (props: Props) => {
     const openModal = () => setVisible(true);
 
     return (
-        <div>
-            <Button type='primary' onClick={openModal}><PlusOutlined /></Button>
+        <div className='flex'>
+            <a className=' text-lg' onClick={openModal}><PlusOutlined /></a>
             <ModifyRecordDetailModal
                 recordUUID={props.recordUUID}
                 visible={visible}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Input, Row, Col } from 'antd';
-
+//TODO 精度問題，如果中途按暫停之後目前的寫法會導致秒數還是會被多扣 1
 const PomodoroTimer = () => {
     const [form] = Form.useForm();
     const initialValues = {

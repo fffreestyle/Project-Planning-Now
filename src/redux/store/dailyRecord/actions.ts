@@ -5,9 +5,9 @@ import { IDailyRecordDetail, IDeleteRecordPayload } from './types';
 import { createAction } from '@reduxjs/toolkit'
 
 
-export const AddRecordDetail = createAction<IDailyRecordDetail>('ADD_DAILY_RECORD_DETAIL');
-export const DeleteRecordDetail = createAction<IDeleteRecordPayload>('DELETE_DAILY_RECORD_DETAIL');
-export const EditRecordDetail = createAction<IDailyRecordDetail>('EDIT_DAILY_RECORD_DETAIL'); 
+export const addRecordDetail = createAction<IDailyRecordDetail>('ADD_DAILY_RECORD_DETAIL');
+export const deleteRecordDetail = createAction<IDeleteRecordPayload>('DELETE_DAILY_RECORD_DETAIL');
+export const editRecordDetail = createAction<IDailyRecordDetail>('EDIT_DAILY_RECORD_DETAIL'); 
 
  
 // export function AddRecordDetail(newRecord: IDailyRecordDetail): DailyRecordActionTypes {
