@@ -20,6 +20,10 @@ export interface IDeleteRecordPayload {
 export interface IDailyRecordState {
     dailyRecords: IDailyRecord[]
 }
+export interface IGetRecords {
+    startDate: Date,
+    endDate: Date
+}
 
 // export const ADD_DAILY_RECORD_DETAIL = 'ADD_DAILY_RECORD_DETAIL';
 // export const EDIT_DAILY_RECORD_DETAIL = 'EDIT_DAILY_RECORD_DETAIL';
