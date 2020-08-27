@@ -9,25 +9,28 @@ import moment from "moment";
 //     IDailyRecord
 // } from "./types";
 import { IDailyRecord, IDailyRecordState } from "./types";
-import { range,clone } from "ramda";
+import { range, clone } from "ramda";
 import { v4 as uuidv4 } from "uuid";
 import { createReducer } from "@reduxjs/toolkit";
-import { addRecordDetail, editRecordDetail, deleteRecordDetail } from "./actions";
+import { addRecordDetail, editRecordDetail, deleteRecordDetail, getRecords } from "./actions";
 
-const weekDay = range(0, 7).map((day) => moment().day(day));
-const records = weekDay.map((day): IDailyRecord => {
-    return {
-        recordUUID: uuidv4(),
-        date: day.toDate(),
-        recordItems: []
-    }
-})
 const initialState: IDailyRecordState = {
-    dailyRecords: records
+    dailyRecords: []
 }
 
 export const dailyRecordReducer = createReducer(initialState, builder =>
     builder
+        .addCase(getRecords, (state, action) => {
+            const dayDurantion = moment(action.payload.endDate).diff(action.payload.startDate, 'd') + 1;
+            const weekDay = range(0, dayDurantion).map((day) => moment(action.payload.startDate).day(day));
+            state.dailyRecords = weekDay.map((day): IDailyRecord => {
+                return {
+                    recordUUID: uuidv4(),
+                    date: day.toDate(),
+                    recordItems: []
+                }
+            })
+        })
         .addCase(addRecordDetail, (state, action) => {
             const beAddRecord = state
                 .dailyRecords
@@ -77,7 +80,7 @@ export const dailyRecordReducer = createReducer(initialState, builder =>
             // }
         })
         .addCase(deleteRecordDetail, (state, action) => {
-            
+
             const beEditRecord = state
                 .dailyRecords
                 .find(dailyRecord => dailyRecord.recordUUID === action.payload.recordUUID);
@@ -86,7 +89,7 @@ export const dailyRecordReducer = createReducer(initialState, builder =>
                 beEditRecord.recordItems.splice(beDeleteRecordDetailIndex, 1);
             }
 
-            
+
             // const newDailyRecords = state.dailyRecords.map((dailyRecord) => {
             //     if (dailyRecord.recordUUID === action.payload.recordUUID) {
             //         return {
