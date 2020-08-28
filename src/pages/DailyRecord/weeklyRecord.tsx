@@ -1,36 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { Row } from 'antd';
 import DailyRecord from './dailyRecord';
-import { IDailyRecord } from '../../redux/store/dailyRecord/types';
 import { RootState } from '../../redux/store';
-import { connect, ConnectedProps } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { getRecords } from '../../redux/store/dailyRecord/actions'
 
-const mapState = (state: RootState) => {
-    return {
-        weeklyRecords: state.dailyRecord.dailyRecords
-    }
-}
-const mapDispatch = {
-    getRecords
-}
-const connector = connect(mapState, mapDispatch);
-
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-type Props = PropsFromRedux
-
-const WeeklyRecord = (props: Props) => {
-    const records = props.weeklyRecords;
+const WeeklyRecord = () => {
+    const records = useSelector((state: RootState) => state.dailyRecord.dailyRecords);
+    const dispatch = useDispatch();
     const [dateRange, setDateRange] = useState({
         startDate: moment().startOf('week').toDate(),
         endDate: moment().endOf('week').toDate()
     })
-    const { getRecords } = props;
     useEffect(() => {
-        getRecords(dateRange);
+        dispatch(getRecords(dateRange));
     }, [dateRange]);
     const goPrevWeek = () => {
         setDateRange({
@@ -64,4 +48,4 @@ const WeeklyRecord = (props: Props) => {
     );
 }
 
-export default connector(WeeklyRecord);
+export default WeeklyRecord;

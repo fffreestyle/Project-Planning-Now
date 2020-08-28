@@ -1,23 +1,21 @@
 import React from 'react'
 import { DeleteOutlined } from '@ant-design/icons'
 import { deleteProject } from '../../redux/store/projectScheduler/actions';
-import { connect, ConnectedProps } from 'react-redux';
-const mapDispatch = {
-    deleteProject
-}
-const connector = connect(null, mapDispatch);
-type PropsFromRedux = ConnectedProps<typeof connector>
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
+
 type PropsFromParent = {
     projectUUID: string
 };
-type Props = PropsFromRedux & PropsFromParent
+type Props = PropsFromParent
 const DeleteProject = (props: Props) => {
-    const { projectUUID, deleteProject } = props;
+    const dispatch = useDispatch();
+    const onClickDelete = () => dispatch(deleteProject({ projectUUID }));
+    const { projectUUID } = props;
     return (
-        <a onClick={() => { deleteProject({ projectUUID }) }} className='text-xl'>
+        <a onClick={onClickDelete} className='text-xl'>
             <DeleteOutlined />
         </a>
     )
 }
 
-export default connector(DeleteProject);
+export default DeleteProject;

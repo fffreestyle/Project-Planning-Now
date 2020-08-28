@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
 import ModifyRecordDetailModal from './modifyRecordDetailModal';
-import { connect, ConnectedProps } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addRecordDetail as addDetail } from '../../redux/store/dailyRecord/actions'
 
-
-const mapDispatch = {
-    addDetail
-}
-const connector = connect(null, mapDispatch);
-
-type PropsFromRedux = ConnectedProps<typeof connector>
 type PropsFromParent = {
     recordUUID: string
 };
-type Props = PropsFromRedux & PropsFromParent
+type Props = PropsFromParent
 
 const AddDailyRecordDetail = (props: Props) => {
     const [visible, setVisible] = useState(false);
-
-    const { addDetail } = props;
+    const dispatch = useDispatch();
 
     const openModal = () => setVisible(true);
 
@@ -32,7 +23,7 @@ const AddDailyRecordDetail = (props: Props) => {
                 recordUUID={props.recordUUID}
                 visible={visible}
                 onOk={(values) => {
-                    addDetail(values);
+                    dispatch(addDetail(values));
                     setVisible(false);
                 }}
                 handleCancel={() => setVisible(false)} />
@@ -40,4 +31,4 @@ const AddDailyRecordDetail = (props: Props) => {
     )
 }
 
-export default connector(AddDailyRecordDetail);
+export default AddDailyRecordDetail;
