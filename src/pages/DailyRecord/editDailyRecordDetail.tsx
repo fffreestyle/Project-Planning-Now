@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
 import { editRecordDetail as editDetail } from '../../redux/store/dailyRecord/actions'
-import { connect, ConnectedProps } from 'react-redux';
-import { PlusOutlined, EditOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { EditOutlined } from '@ant-design/icons';
 import ModifyRecordDetailModal, { IinitialValues } from './modifyRecordDetailModal';
 import { IDailyRecordDetail } from '../../redux/store/dailyRecord/types';
-const mapDispatch = {
-    editDetail
-}
-const connector = connect(null, mapDispatch);
 
-type PropsFromRedux = ConnectedProps<typeof connector>
 type PropsFromParent = {
     record: IDailyRecordDetail
 };
-type Props = PropsFromRedux & PropsFromParent
+type Props = PropsFromParent
 
 const EditDailyRecordDetail = (props: Props) => {
     const [visible, setVisible] = useState(false);
-
-    const { editDetail } = props;
+    const dispatch = useDispatch();
 
     const openModal = () => setVisible(true);
     const initialValues: IinitialValues = {
@@ -37,7 +30,7 @@ const EditDailyRecordDetail = (props: Props) => {
                 initialValues={initialValues}
                 visible={visible}
                 onOk={(values) => {
-                    editDetail(values);
+                    dispatch(editDetail(values));
                     setVisible(false);
                 }}
                 handleCancel={() => setVisible(false)} />
@@ -45,4 +38,4 @@ const EditDailyRecordDetail = (props: Props) => {
     )
 }
 
-export default connector(EditDailyRecordDetail);
+export default EditDailyRecordDetail;
