@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/project-planning-now/static/css/main.8cb597e0.chunk.css",
-    "main.js": "/project-planning-now/static/js/main.ca1f4fe5.chunk.js",
-    "main.js.map": "/project-planning-now/static/js/main.ca1f4fe5.chunk.js.map",
-    "runtime-main.js": "/project-planning-now/static/js/runtime-main.2cf2d739.js",
-    "runtime-main.js.map": "/project-planning-now/static/js/runtime-main.2cf2d739.js.map",
-    "static/css/2.4deadad5.chunk.css": "/project-planning-now/static/css/2.4deadad5.chunk.css",
-    "static/js/2.d096c805.chunk.js": "/project-planning-now/static/js/2.d096c805.chunk.js",
-    "static/js/2.d096c805.chunk.js.map": "/project-planning-now/static/js/2.d096c805.chunk.js.map",
-    "index.html": "/project-planning-now/index.html",
-    "precache-manifest.5c6e682c10e2e5cc92e646529ab0337f.js": "/project-planning-now/precache-manifest.5c6e682c10e2e5cc92e646529ab0337f.js",
-    "service-worker.js": "/project-planning-now/service-worker.js",
-    "static/css/2.4deadad5.chunk.css.map": "/project-planning-now/static/css/2.4deadad5.chunk.css.map",
-    "static/css/main.8cb597e0.chunk.css.map": "/project-planning-now/static/css/main.8cb597e0.chunk.css.map",
-    "static/js/2.d096c805.chunk.js.LICENSE.txt": "/project-planning-now/static/js/2.d096c805.chunk.js.LICENSE.txt"
+    "main.css": "/Project-Planning-Now/static/css/main.8cb597e0.chunk.css",
+    "main.js": "/Project-Planning-Now/static/js/main.0ed6aec4.chunk.js",
+    "main.js.map": "/Project-Planning-Now/static/js/main.0ed6aec4.chunk.js.map",
+    "runtime-main.js": "/Project-Planning-Now/static/js/runtime-main.2c45edb6.js",
+    "runtime-main.js.map": "/Project-Planning-Now/static/js/runtime-main.2c45edb6.js.map",
+    "static/css/2.4deadad5.chunk.css": "/Project-Planning-Now/static/css/2.4deadad5.chunk.css",
+    "static/js/2.b5009443.chunk.js": "/Project-Planning-Now/static/js/2.b5009443.chunk.js",
+    "static/js/2.b5009443.chunk.js.map": "/Project-Planning-Now/static/js/2.b5009443.chunk.js.map",
+    "index.html": "/Project-Planning-Now/index.html",
+    "precache-manifest.9910e84782e893b256941c60812dad00.js": "/Project-Planning-Now/precache-manifest.9910e84782e893b256941c60812dad00.js",
+    "service-worker.js": "/Project-Planning-Now/service-worker.js",
+    "static/css/2.4deadad5.chunk.css.map": "/Project-Planning-Now/static/css/2.4deadad5.chunk.css.map",
+    "static/css/main.8cb597e0.chunk.css.map": "/Project-Planning-Now/static/css/main.8cb597e0.chunk.css.map",
+    "static/js/2.b5009443.chunk.js.LICENSE.txt": "/Project-Planning-Now/static/js/2.b5009443.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2cf2d739.js",
+    "static/js/runtime-main.2c45edb6.js",
     "static/css/2.4deadad5.chunk.css",
-    "static/js/2.d096c805.chunk.js",
+    "static/js/2.b5009443.chunk.js",
     "static/css/main.8cb597e0.chunk.css",
-    "static/js/main.ca1f4fe5.chunk.js"
+    "static/js/main.0ed6aec4.chunk.js"
   ]
 }
