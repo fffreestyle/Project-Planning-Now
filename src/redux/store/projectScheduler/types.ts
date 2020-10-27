@@ -1,28 +1,33 @@
 export interface IProjectInfo  {
-    projectUUID: string,
+    projectUUID: string | null,
     name: string,
     description: string,
     members: Member[],
+    startDate: Date,
+    closeDate: Date,
     task: Task[],
 }
 export interface Task {
     title: string,
     description: string,
     members: Member[],
-    startWeek: Number,
-    closeWeek: Number,
+    startDate: Date,
+    closeDate: Date,
     subTask: SubTask[]
 }
 export interface SubTask {
     title: String,
     members: Member[],
-    startWeek: Number,
-    closeWeek: Number
+    startDate: Date,
+    closeDate: Date,
 }
 export interface Member {
     id: string,
     email: string,
     nickName: string
+}
+export interface IDeleteIProjectInfo {
+    projectUUID: string
 }
 export interface IDeleteIProjectInfo {
     projectUUID: string
