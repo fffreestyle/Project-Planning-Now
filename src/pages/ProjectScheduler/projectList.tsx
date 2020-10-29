@@ -2,7 +2,7 @@ import React from 'react'
 import { RootState } from '../../redux/store'
 import { connect, ConnectedProps } from 'react-redux';
 import { List } from 'antd';
-import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useRouteMatch, Link } from 'react-router-dom';
 import DeleteProject from './deleteProject';
 const mapState = (state: RootState) => {
@@ -16,7 +16,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux
 const ProjectList = (props: Props) => {
     const projectList = props.projectList;
-    
+
     const { path, url } = useRouteMatch();
     return (
         <div className="container mx-auto">
@@ -33,8 +33,9 @@ const ProjectList = (props: Props) => {
                 dataSource={projectList}
                 renderItem={item => (
                     <List.Item actions={[
+                        <InfoCircleOutlined />,
                         <Link className='text-xl' to={`${url}/edit/${item.projectUUID}`} key="list-loadmore-edit"><EditOutlined /></Link>,
-                        <DeleteProject projectUUID={item.projectUUID}></DeleteProject>
+                        <DeleteProject projectUUID={item.projectUUID === null ? '' : item.projectUUID}></DeleteProject>
                     ]}>
                         <List.Item.Meta
                             title={<div>{item.name}</div>}

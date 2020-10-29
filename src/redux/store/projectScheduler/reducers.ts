@@ -3,27 +3,7 @@ import { IProjectInfo } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { addProject, editProject, deleteProject } from "./actions";
 import { clone } from 'ramda';
-const initialState: IProjectInfo[] = [{
-    projectUUID: uuidv4(),
-    name: 'test',
-    description: 'Test',
-    members: [],
-    task: [{
-        title: 'task1',
-        description: 'task 1',
-        members: [],
-        startWeek: 11,
-        closeWeek: 20,
-        subTask: [
-            {
-                title: 'subTask1',
-                members: [],
-                startWeek: 11,
-                closeWeek: 15
-            }
-        ]
-    }]
-}];
+const initialState: IProjectInfo[] = [];
 
 export const projectSchedulerReducer = createReducer(initialState, builder =>
     builder
