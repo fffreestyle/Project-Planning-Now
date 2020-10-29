@@ -11,13 +11,13 @@ const useTimer = (params: Params) => {
   const [count, setCount] = useState(10000)
   const [initialCount, setInitialCount] = useState<number | undefined>(initialValue)
   const timerRef = useRef<number>()
-  const time = count - moment(now).diff(moment(startTime), 'milliseconds')
+  const time = ((count - moment(now).diff(moment(startTime), 'milliseconds')) < 0 ? 0 : (count - moment(now).diff(moment(startTime), 'milliseconds')));
 
   useEffect(() => {
     if (window && timerRef.current && time < 10) {
       window.clearInterval(timerRef.current)
       timerRef.current = undefined
-    } 
+    }
   }, [time])
 
   useEffect(() => {

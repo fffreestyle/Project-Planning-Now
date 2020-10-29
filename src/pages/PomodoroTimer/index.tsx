@@ -1,69 +1,67 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Input, Row, Col, InputNumber } from 'antd';
 import useTimer from '../../hooks/useTimer';
-//TODO 精度問題，如果中途按暫停之後目前的寫法會導致秒數還是會被多扣 1
+enum Stage {
+    init,
+    workingTime,
+    restingTime,
+    wait
+}
+
 const PomodoroTimer = () => {
     const [form] = Form.useForm();
     const initialValues = {
-        workingInterval: 25,
-        restInterval: 5
+        workingInterval: 0.1,
+        restInterval: 0.1
     }
-    const { time, startTimer: testStart,
+    const workflow = [Stage.init, Stage.workingTime, Stage.wait, Stage.restingTime];
+    const [currentStage, setCurrentStage] = useState(0);
+    const { time,
+        startTimer,
         setTimer,
         pauseTimer,
-        resetTimer, } = useTimer({})
-    const [isActive, setIsActive] = useState(false);
-    const [isWorkingTime, setIsWorkingTime] = useState(false);
-    const [isRestTime, setIsRestTime] = useState(false);
-    const [workingSeconds, setWorkingSeconds] = useState(0);
-    const [restSeconds, setRestSeconds] = useState(0);
-    const [workingInterval, setWorkingInterval] = useState(initialValues.workingInterval);
-    const [restInterval, setRestInterval] = useState(initialValues.restInterval);
+        resetTimer, } = useTimer({ initialValue: initialValues.workingInterval * 60 * 1000 });
 
-    const second = Math.floor(time / 1000)
+    const second = Math.floor(time / 1000);
+    const nextStage = (currentStage: number, workflow: Stage[]) => {
+        setCurrentStage(Math.floor((currentStage + 1) % workflow.length));
+    }
+
     useEffect(() => {
-        let timer = window.setTimeout(() => {
-            if (isActive && isWorkingTime) {
-                if (workingSeconds > workingInterval * 60) {
-                    new Notification('Resting Time!');
-                    console.log('Time to rest');
-                    setIsRestTime(true);
-                    setIsWorkingTime(false);
-                    setWorkingSeconds(0);
-                    return;
-                }
-                setWorkingSeconds((seconds) => seconds + 1);
-                console.log(workingSeconds)
+        const showNotification = (currentStage: number, workflow: Stage[]) => {
+            if (workflow[currentStage] === Stage.workingTime) {
+                let n = new Notification('Resting Time! 請按開始休息按鈕');
+                n.onshow = () => setTimeout(() => n.close(), 3000);
+
             }
-        }, 1000)
-        return () => window.clearTimeout(timer);
-    }, [isActive, isWorkingTime, workingSeconds])
-    useEffect(() => {
-        let timer = window.setTimeout(() => {
-            if (isActive && isRestTime) {
-                if (restSeconds > restInterval * 60) {
-                    new Notification('Working Time!');
-                    console.log('Time to work');
-                    setIsRestTime(false);
-                    setIsWorkingTime(true);
-                    setRestSeconds(0);
-                    return;
-                }
-                setRestSeconds((seconds) => seconds + 1);
-                console.log(restSeconds)
+            if (workflow[currentStage] === Stage.restingTime) {
+                let n = new Notification('Working Time! 請按開始工作按鈕');
+                n.onshow = () => setTimeout(() => n.close(), 3000);
             }
-        }, 1000)
-        return () => window.clearTimeout(timer);
-    }, [isActive, isRestTime, restSeconds])
-    const startTimer = () => {
+        }
+        if (second === 0) {
+            showNotification(currentStage, workflow);
+            nextStage(currentStage, workflow);
+        }
+    }, [second])
+    const start = () => {
         form
             .validateFields()
             .then(fields => {
-                setWorkingInterval(fields.workingInterval);
-                setRestInterval(fields.restInterval);
-                setIsWorkingTime(true);
-                setIsActive(true);
-            });
+                if (workflow[currentStage] === Stage.init) {
+                    setTimer(fields.workingInterval * 60);
+                    startTimer();
+                    nextStage(currentStage, workflow);
+                }
+                if (workflow[currentStage] === Stage.wait) {
+                    setTimer(fields.restInterval * 60);
+                    startTimer();
+                    nextStage(currentStage, workflow);
+                }
+            })
+            .catch(reason => {
+                console.log(reason);
+            });;
     }
     const onStartTimer = () => {
         if (Notification && Notification.permission !== "granted") {
@@ -73,21 +71,26 @@ const PomodoroTimer = () => {
                         alert('請同意網頁通知番茄鐘提醒');
                         return;
                     }
-                    startTimer();
+                    start();
                 });
             return;
         }
-        startTimer();
+        start();
+    }
+    const onResetTimer = () => {
+        form
+            .validateFields()
+            .then(fields => {
+                setCurrentStage(0);
+                setTimer(fields.workingInterval * 60);
+                resetTimer();
 
+            })
+            .catch(reason => {
+                console.log(reason);
+            });
     }
-    const onStopTimer = () => {
-        setIsWorkingTime(false);
-        setIsRestTime(false);
-        setIsActive(false);
-        setWorkingSeconds(0);
-        setRestSeconds(0);
-    }
-    // console.log('time', time)
+
     return (
         <div>
             <Form form={form} initialValues={initialValues}>
@@ -108,17 +111,11 @@ const PomodoroTimer = () => {
                     </Row>
                 </Input.Group>
             </Form>
-            <Button onClick={onStartTimer}>Start</Button><Button onClick={onStopTimer}>Stop</Button>
-            <br />
-            <br />
-            <br />
-            <h4>以下為 useTimer demo</h4>
-            <div />
-            <InputNumber onChange={(number) => typeof number === 'number' ? setTimer(number) : undefined}></InputNumber>
-            <Button onClick={testStart}>開始</Button>
-            <Button onClick={pauseTimer}>暫停</Button>
-            <Button onClick={resetTimer}>重置</Button>
-            <div>{second}</div>
+            <Button onClick={onStartTimer} disabled={(workflow[currentStage] === Stage.workingTime || workflow[currentStage] === Stage.restingTime)}>
+                {(workflow[currentStage] === Stage.wait || workflow[currentStage] === Stage.workingTime ? '開始休息' : '開始工作')}
+            </Button>
+            <Button onClick={onResetTimer}>Reset</Button>
+            {second}
         </div >
     )
 }
