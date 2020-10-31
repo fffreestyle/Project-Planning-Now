@@ -11,7 +11,7 @@ const useTimer = (params: Params) => {
   const [count, setCount] = useState(10000)
   const [initialCount, setInitialCount] = useState<number | undefined>(initialValue)
   const timerRef = useRef<number>()
-  const time = ((count - moment(now).diff(moment(startTime), 'milliseconds')) < 0 ? 0 : (count - moment(now).diff(moment(startTime), 'milliseconds')));
+  const time = (count - moment(now).diff(moment(startTime), 'milliseconds')) < 0 ? 0 : (count - moment(now).diff(moment(startTime), 'milliseconds'));
 
   useEffect(() => {
     if (window && timerRef.current && time < 10) {
@@ -53,8 +53,8 @@ const useTimer = (params: Params) => {
     setCount(initialCount ?? 10000)
   }
 
-  const setTimer = (seconds: number) => {
-    setInitialCount(seconds * 1000)
+  const setTimer = (milliseconds: number) => {
+    setInitialCount(milliseconds)
   }
 
   return {
