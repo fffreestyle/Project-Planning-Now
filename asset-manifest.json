@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Project-Planning-Now/static/css/main.8cb597e0.chunk.css",
-    "main.js": "/Project-Planning-Now/static/js/main.0ed6aec4.chunk.js",
-    "main.js.map": "/Project-Planning-Now/static/js/main.0ed6aec4.chunk.js.map",
+    "main.css": "/Project-Planning-Now/static/css/main.6e7221f3.chunk.css",
+    "main.js": "/Project-Planning-Now/static/js/main.1a1acb8c.chunk.js",
+    "main.js.map": "/Project-Planning-Now/static/js/main.1a1acb8c.chunk.js.map",
     "runtime-main.js": "/Project-Planning-Now/static/js/runtime-main.2c45edb6.js",
     "runtime-main.js.map": "/Project-Planning-Now/static/js/runtime-main.2c45edb6.js.map",
     "static/css/2.4deadad5.chunk.css": "/Project-Planning-Now/static/css/2.4deadad5.chunk.css",
-    "static/js/2.b5009443.chunk.js": "/Project-Planning-Now/static/js/2.b5009443.chunk.js",
-    "static/js/2.b5009443.chunk.js.map": "/Project-Planning-Now/static/js/2.b5009443.chunk.js.map",
+    "static/js/2.85bbf428.chunk.js": "/Project-Planning-Now/static/js/2.85bbf428.chunk.js",
+    "static/js/2.85bbf428.chunk.js.map": "/Project-Planning-Now/static/js/2.85bbf428.chunk.js.map",
     "index.html": "/Project-Planning-Now/index.html",
-    "precache-manifest.9910e84782e893b256941c60812dad00.js": "/Project-Planning-Now/precache-manifest.9910e84782e893b256941c60812dad00.js",
+    "precache-manifest.e56e13fecc0a403d58eb70c565bf94dd.js": "/Project-Planning-Now/precache-manifest.e56e13fecc0a403d58eb70c565bf94dd.js",
     "service-worker.js": "/Project-Planning-Now/service-worker.js",
     "static/css/2.4deadad5.chunk.css.map": "/Project-Planning-Now/static/css/2.4deadad5.chunk.css.map",
-    "static/css/main.8cb597e0.chunk.css.map": "/Project-Planning-Now/static/css/main.8cb597e0.chunk.css.map",
-    "static/js/2.b5009443.chunk.js.LICENSE.txt": "/Project-Planning-Now/static/js/2.b5009443.chunk.js.LICENSE.txt"
+    "static/css/main.6e7221f3.chunk.css.map": "/Project-Planning-Now/static/css/main.6e7221f3.chunk.css.map",
+    "static/js/2.85bbf428.chunk.js.LICENSE.txt": "/Project-Planning-Now/static/js/2.85bbf428.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2c45edb6.js",
     "static/css/2.4deadad5.chunk.css",
-    "static/js/2.b5009443.chunk.js",
-    "static/css/main.8cb597e0.chunk.css",
-    "static/js/main.0ed6aec4.chunk.js"
+    "static/js/2.85bbf428.chunk.js",
+    "static/css/main.6e7221f3.chunk.css",
+    "static/js/main.1a1acb8c.chunk.js"
   ]
 }
